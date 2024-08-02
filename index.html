@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+               
+              }
+            }
+          }
+        }
+      </script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <div class="w-screen h-screen  flex justify-center items-center" x-data="alpinejs()">
+       <div class="w-[600px] h-[600px] ">
+        <div class="w-full flex">
+          <div class="basis-10/12">
+            <input @keyup.enter="save()" x-model="input" class="border-2 border-gray-500 hover:border-gray-500 w-full py-1 rounded-l-lg  hover:outline-none active:outline-none" type="text">
+          </div>
+          <div class="basis-2/12 ">
+            <button @click="save()" class="w-full bg-green-600 py-[6px] rounded-r-lg text-white">Save</button>
+          </div>
+        </div>
+
+        <div class="w-full ">
+            <template x-for="(row,index) in list">
+                <div  class="w-full border-2 rounded-lg flex justify-between">
+                    <span class="ml-5" x-text="row"></span>
+                    <button @click="remove(index)" class="bg-red-600 px-2 py-1 rounded-lg text-white">Remove</button>
+                </div>
+            </template>
+           
+           
+        </div>
+       </div>
+    </div>
+
+    <script>
+        function alpinejs(){
+            return{
+                input:'',
+                list:[],
+                 message:'HI',
+                 save(){
+                  this.list.push(this.input);
+                  this.input='';
+                 },
+                 remove(index){
+                   let ok=confirm(`OK to ${this.list[index]}`);
+                   if(ok){
+                    this.list.splice(index, 1);
+                   }
+                   
+                 }
+                
+            }
+        }
+    </script>
+</body>
+</html>
